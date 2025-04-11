@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery | khambug</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-toggle.js" defer></script>
+  <script src="js/page-transition.js" defer></script>
+</head>
+<body class="fade-transition">
+  <header>
+    <div class="container nav-container">
+      <h1 class="logo">khambug</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="gallery.html" class="active">Gallery</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <label class="toggle">
+              <input type="checkbox" id="theme-toggle">
+              <span class="slider"></span>
+            </label>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <h2>Gallery</h2>
+    <p>Click and explore our interactive video showcase:</p>
+    <div class="video-grid">
+      <div class="video-card">
+        <video src="videos/video1.mp4" controls poster="images/thumb1.jpg"></video>
+        <p>Mountains</p>
+      </div>
+      <div class="video-card">
+        <video src="videos/video2.mp4" controls poster="images/thumb2.jpg"></video>
+        <p>Duck</p>
+      </div>
+      <div class="video-card">
+        <video src="videos/video3.mp4" controls poster="images/thumb3.jpg"></video>
+        <p>Sky</p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 khambug | Kathmandu, Nepal</p>
+  </footer>
+</body>
+</html>

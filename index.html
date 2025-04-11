@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Final Webpage</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-toggle.js" defer></script>
+  <script src="js/page-transition.js" defer></script>
+
+  <style>
+    .fade-out .no-transition {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  </style>
+
+  <style>
+    #intro-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0,0,0,0.9));
+      z-index: 1000;
+      animation: fadeIntro 2s ease forwards;
+    }
+
+    @keyframes fadeIntro {
+      0% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+
+<body class="fade-transition">
+  <div id="intro-overlay" class="intro-animate"></div>
+  <canvas id="particle-canvas"></canvas>
+  <div class="intro-overlay"></div>
+  <header>
+    <div class="container nav-container">
+      <h1 style="text-align: left;" class="logo">Advertisement Webpage</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <label class="toggle">
+              <input type="checkbox" id="theme-toggle">
+              <span class="slider"></span>
+            </label>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="hero">
+    <div class="hero-text">
+      <h2 class="fade-in-up">Reimagine Your Creativity</h2>
+      <p>Immersive. Animated. Made for modern desktops.</p>
+    </div>
+    <div class="hero-video no-fade">
+      <video src="videos/video1.mp4" autoplay loop muted playsinline preload="auto" poster="images/thumb1.jpg" style="width: 100%; height: 100%; object-fit: cover; display: block; transform: translateZ(0); backface-visibility: hidden;"></video>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 khambug |in Kathmandu</p>
+  </footer>
+
+<script>
+  const canvas = document.getElementById("particle-canvas");
+  const ctx = canvas.getContext("2d");
+
+  let particles = [];
+  const particleCount = 70;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  function createParticles() {
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: Math.random() * 1.8 + 1,
+        alpha: Math.random() * 0.6 + 0.3
+      });
+    }
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+      ctx.fillStyle = document.body.classList.contains('dark') 
+  ? `rgba(255, 255, 255, ${p.alpha})` 
+  : `rgba(0, 0, 0, ${p.alpha})`;
+      ctx.fill();
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    }
+    requestAnimationFrame(drawParticles);
+  }
+
+  createParticles();
+  drawParticles();
+</script>
+</body>
+</html>
